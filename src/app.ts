@@ -4,6 +4,7 @@ import cors from "cors";
 import { toNodeHandler } from "better-auth/node";
 import { auth } from "./config/auth.js";
 import { verifyToken } from "./middleware/verifyToken.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 import eventRoutes from "./routes/event.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
@@ -41,5 +42,8 @@ app.get("/", (_req, res) => {
     version: "1.0.0",
   });
 });
+
+// Global Error Handler Middleware
+app.use(errorHandler);
 
 export default app;
