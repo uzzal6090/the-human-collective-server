@@ -16,8 +16,8 @@ app.use(
   })
 );
 
-// Better Auth handler must come before express.json()
-app.all("/api/auth/*", toNodeHandler(auth));
+// Better Auth handler in Express 5 uses path-to-regexp v8 wildcard {*any}
+app.all("/api/auth/{*any}", toNodeHandler(auth));
 
 app.use(express.json());
 
