@@ -16,6 +16,7 @@ const router = Router();
 
 // Public routes
 router.get("/recent", getRecentUpcomingEvents);
+router.get("/upcoming", getAllUpcomingEvents);
 router.get("/", getAllUpcomingEvents);
 
 // Specific protected user routes (Must be declared before /:id)
