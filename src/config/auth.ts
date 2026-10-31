@@ -22,7 +22,9 @@ export const auth = betterAuth({
 
   trustedOrigins: [
     process.env.CLIENT_URL || "http://localhost:3000",
+    "https://the-human-collective-client.vercel.app",
     "https://*.vercel.app",
+    "http://localhost:3000",
   ],
 
   emailAndPassword: {
@@ -30,6 +32,13 @@ export const auth = betterAuth({
   },
 
   socialProviders,
+
+  advanced: {
+    defaultCookieAttributes: {
+      sameSite: "none",
+      secure: true,
+    },
+  },
 
   plugins: [jwt()],
 });

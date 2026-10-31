@@ -54,7 +54,13 @@ app.get("/api/protected", verifyToken, (req, res) => {
 });
 
 // Production Root Health & Status Endpoint
-app.get("/", (_req, res) => {
+app.get("/", (req, res) => {
+  // If an end-user / browser lands on root (e.g. following OAuth or direct link), redirect to the client frontend!
+  if (req.headers.accept && req.headers.accept.includes("text/html")) {
+    const clientUrl = process.env.CLIENT_URL || "https://the-human-collective-client.vercel.app";
+    return res.redirect(clientUrl);
+  }
+
   res.json({
     success: true,
     name: "The Human Collective API",
