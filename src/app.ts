@@ -26,7 +26,7 @@ app.use(express.json());
 app.use("/api/events", eventRoutes);
 app.use("/api/user", userRoutes);
 
-// Health & Protected Test Route
+// Protected Auth Verification Endpoint
 app.get("/api/protected", verifyToken, (req, res) => {
   res.json({
     success: true,
@@ -35,10 +35,14 @@ app.get("/api/protected", verifyToken, (req, res) => {
   });
 });
 
+// Production Root Health & Status Endpoint
 app.get("/", (_req, res) => {
   res.json({
     success: true,
-    message: "The Human Collective API is running smoothly",
+    name: "The Human Collective API",
+    status: "healthy",
+    uptimeSeconds: Math.floor(process.uptime()),
+    timestamp: new Date().toISOString(),
     version: "1.0.0",
   });
 });
