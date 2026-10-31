@@ -5,6 +5,7 @@ import { toNodeHandler } from "better-auth/node";
 import { auth } from "./config/auth.js";
 import { verifyToken } from "./middleware/verifyToken.js";
 import eventRoutes from "./routes/event.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.json());
 
 // API Routes
 app.use("/api/events", eventRoutes);
+app.use("/api/user", userRoutes);
 
 // Health & Protected Test Route
 app.get("/api/protected", verifyToken, (req, res) => {
