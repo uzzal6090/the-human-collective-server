@@ -1,5 +1,10 @@
 ﻿# The Human Collective — Server API
 
+> **Live Server API URL:** [https://the-human-collective-server.vercel.app](https://the-human-collective-server.vercel.app)  
+> **Live Frontend Application:** [https://the-human-collective-client.vercel.app](https://the-human-collective-client.vercel.app)  
+> **Client Repository:** [https://github.com/uzzal6090/the-human-collective-client](https://github.com/uzzal6090/the-human-collective-client)  
+> **Server Repository:** [https://github.com/uzzal6090/the-human-collective-server](https://github.com/uzzal6090/the-human-collective-server)
+
 Backend RESTful API for **The Human Collective**, a community-driven event management platform where users can create, discover, join, and manage social service events in their local area.
 
 ---
