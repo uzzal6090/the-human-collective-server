@@ -9,8 +9,13 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import eventRoutes from "./routes/event.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
-// Ensure DB connection for serverless / traditional environments
-connectDatabase().catch((err) => console.error("Database connection error:", err));
+// Ensure DB connection is established before the app handles any requests.
+// Awaiting here prevents the fire-and-forget race condition where requests
+// could reach database-dependent routes before MongoDB is connected.
+await connectDatabase().catch((err) => {
+  console.error("Database initialization failed:", err instanceof Error ? err.message : String(err));
+  throw err;
+});
 
 const app = express();
 
