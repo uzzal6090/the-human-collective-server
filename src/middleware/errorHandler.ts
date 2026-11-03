@@ -6,7 +6,11 @@ export function errorHandler(
   res: Response,
   _next: NextFunction
 ): void {
-  console.error("Unhandled API Error:", err.stack || err.message);
+  if (process.env.NODE_ENV === "production") {
+    console.error("Unhandled API Error:", err.message);
+  } else {
+    console.error("Unhandled API Error:", err.stack || err.message);
+  }
 
   res.status(500).json({
     success: false,

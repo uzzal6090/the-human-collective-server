@@ -7,6 +7,12 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import eventRoutes from "./routes/event.routes.js";
 import userRoutes from "./routes/user.routes.js";
 
+import { setServers } from "node:dns";
+
+if (process.env.NODE_ENV !== "production") {
+  setServers(["8.8.8.8", "8.8.4.4"]);
+}
+
 // Ensure DB connection is established before the app handles any requests.
 // Awaiting here prevents the fire-and-forget race condition where requests
 // could reach database-dependent routes before MongoDB is connected.
@@ -26,13 +32,10 @@ app.use(
   cors({
     origin: (origin, callback) => {
       if (!origin) return callback(null, true);
-      if (
-        allowedOrigins.includes(origin) ||
-        origin.endsWith(".vercel.app")
-      ) {
+      if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(null, origin);
+      return callback(null, false);
     },
     credentials: true,
   })
